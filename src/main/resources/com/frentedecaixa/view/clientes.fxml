@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.frentedecaixa.controller.ClienteController">
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+    <Label text="Cadastro de Clientes" styleClass="label-titulo"/>
+
+    <GridPane hgap="10" vgap="8">
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="campoNome" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200"/>
+
+        <Label text="CPF:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="campoCpf" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+
+        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="campoEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+        <Label text="Limite Credito:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="campoLimite" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Novo" onAction="#novo"/>
+        <Button text="Salvar" onAction="#salvar" styleClass="button-success"/>
+        <Button text="Excluir" onAction="#excluir" styleClass="button-danger"/>
+    </HBox>
+
+    <TableView fx:id="tabelaClientes" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="180"/>
+            <TableColumn fx:id="colCpf" text="CPF" prefWidth="120"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
+            <TableColumn fx:id="colLimite" text="Limite" prefWidth="80"/>
+        </columns>
+    </TableView>
+</VBox>

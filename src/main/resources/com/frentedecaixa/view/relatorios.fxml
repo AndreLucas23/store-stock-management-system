@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.frentedecaixa.controller.RelatorioController">
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+    <Label text="Relatorio de Vendas" styleClass="label-titulo"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Periodo:"/>
+        <ComboBox fx:id="comboPeriodo" prefWidth="150"/>
+    </HBox>
+
+    <HBox fx:id="painelDatas" spacing="10" alignment="CENTER_LEFT">
+        <Label text="De:"/>
+        <DatePicker fx:id="datePickerInicio"/>
+        <Label text="Ate:"/>
+        <DatePicker fx:id="datePickerFim"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Pagamento:"/>
+        <ComboBox fx:id="comboFiltroPagamento" prefWidth="150"/>
+        <Button text="Filtrar" onAction="#filtrar"/>
+    </HBox>
+
+    <TableView fx:id="tabelaVendas" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colData" text="Data" prefWidth="100"/>
+            <TableColumn fx:id="colCliente" text="Cliente ID" prefWidth="80"/>
+            <TableColumn fx:id="colPagamento" text="Pagamento" prefWidth="100"/>
+            <TableColumn fx:id="colDesconto" text="Desconto" prefWidth="80"/>
+            <TableColumn fx:id="colTotal" text="Total" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="20">
+        <Label text="Total de vendas:"/>
+        <Label fx:id="lblTotalVendas" styleClass="label-total"/>
+    </HBox>
+</VBox>

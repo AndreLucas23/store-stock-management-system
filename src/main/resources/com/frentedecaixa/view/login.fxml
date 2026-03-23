@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.frentedecaixa.controller.LoginController">
+    <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+    <Label text="Frente de Caixa" styleClass="label-titulo"/>
+    <Label text="Sistema de Vendas e Estoque" styleClass="label-subtitulo"/>
+
+    <VBox spacing="8" alignment="CENTER" maxWidth="250">
+        <Label text="CPF:"/>
+        <TextField fx:id="campoCpf" promptText="Digite seu CPF"/>
+    </VBox>
+
+    <Button fx:id="btnEntrar" text="Entrar" onAction="#entrar" prefWidth="150"/>
+
+    <Label fx:id="lblMensagem" textFill="red"/>
+</VBox>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.frentedecaixa.controller.PDVController">
+
+    <!-- Menu Superior -->
+    <top>
+        <VBox>
+            <MenuBar fx:id="menuBar">
+                <Menu fx:id="menuCadastros" text="Cadastros">
+                    <MenuItem text="Produtos" onAction="#abrirProdutos"/>
+                    <MenuItem text="Clientes" onAction="#abrirClientes"/>
+                </Menu>
+                <Menu fx:id="menuConsultas" text="Consultas">
+                    <MenuItem fx:id="menuItemEstoque" text="Estoque" onAction="#abrirEstoque"/>
+                    <MenuItem text="Relatorios" onAction="#abrirRelatorios"/>
+                </Menu>
+                <Menu text="Sistema">
+                    <MenuItem text="Trocar Usuario" onAction="#trocarUsuario"/>
+                    <MenuItem text="Sair" onAction="#sair"/>
+                </Menu>
+            </MenuBar>
+        </VBox>
+    </top>
+
+    <!-- Painel Esquerdo: Busca de Produtos -->
+    <left>
+        <VBox spacing="10" prefWidth="320" styleClass="painel-lateral">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Label text="Produtos" styleClass="label-subtitulo"/>
+            <HBox spacing="5">
+                <TextField fx:id="campoBuscaProduto" promptText="Buscar produto..." HBox.hgrow="ALWAYS"/>
+                <Button text="Buscar" onAction="#buscarProduto"/>
+            </HBox>
+            <TableView fx:id="tabelaProdutos" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colProdId" text="ID" prefWidth="40"/>
+                    <TableColumn fx:id="colProdNome" text="Nome" prefWidth="120"/>
+                    <TableColumn fx:id="colProdPreco" text="Preco" prefWidth="70"/>
+                    <TableColumn fx:id="colProdEstoque" text="Estoque" prefWidth="60"/>
+                </columns>
+            </TableView>
+            <HBox spacing="5" alignment="CENTER">
+                <Label text="Qtd:"/>
+                <Spinner fx:id="spinnerQtd" prefWidth="80"/>
+                <Button text="Adicionar" onAction="#adicionarItem" styleClass="button-success"/>
+            </HBox>
+        </VBox>
+    </left>
+
+    <!-- Centro: Carrinho -->
+    <center>
+        <VBox spacing="10">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Label text="Carrinho de Vendas" styleClass="label-subtitulo"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Cliente:"/>
+                <ComboBox fx:id="comboCliente" prefWidth="200"/>
+                <Button text="Nova Venda" onAction="#novaVenda" styleClass="button-warning"/>
+            </HBox>
+
+            <TableView fx:id="tabelaCarrinho" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colCarrProduto" text="Produto" prefWidth="150"/>
+                    <TableColumn fx:id="colCarrQtd" text="Qtd" prefWidth="50"/>
+                    <TableColumn fx:id="colCarrPreco" text="Preco Unit." prefWidth="80"/>
+                    <TableColumn fx:id="colCarrSubtotal" text="Subtotal" prefWidth="80"/>
+                </columns>
+            </TableView>
+
+            <Button text="Remover Item" onAction="#removerItem" styleClass="button-danger"/>
+        </VBox>
+    </center>
+
+    <!-- Painel Direito: Resumo e Pagamento -->
+    <right>
+        <VBox spacing="15" prefWidth="250" styleClass="painel-lateral">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Label text="Resumo da Venda" styleClass="label-subtitulo"/>
+
+            <VBox spacing="5">
+                <Label text="Subtotal:"/>
+                <Label fx:id="lblSubtotal" text="R$ 0,00" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <VBox fx:id="painelDesconto" spacing="5">
+                <Label text="Desconto (%):"/>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <TextField fx:id="campoDesconto" text="0" prefWidth="80" disable="true"/>
+                    <Button fx:id="btnAutorizarDesconto" text="Autorizar" onAction="#autorizarDesconto" style="-fx-font-size: 11px; -fx-padding: 4 8;"/>
+                </HBox>
+                <Label fx:id="lblDescontoStatus" text="" style="-fx-font-size: 11px;"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Total:"/>
+                <Label fx:id="lblTotal" text="R$ 0,00" styleClass="label-total"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Forma de Pagamento:"/>
+                <ComboBox fx:id="comboPagamento" prefWidth="200"/>
+            </VBox>
+
+            <VBox fx:id="painelBandeira" spacing="5" visible="false" managed="false">
+                <Label text="Bandeira:"/>
+                <ComboBox fx:id="comboBandeira" prefWidth="200"/>
+            </VBox>
+
+            <VBox fx:id="painelTaxa" spacing="5" visible="false" managed="false">
+                <Label text="Taxa do Cartao (2.5%):"/>
+                <Label fx:id="lblTaxa" text="R$ 0,00" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #f44336;"/>
+                <Label text="Total com Taxa:"/>
+                <Label fx:id="lblTotalComTaxa" text="R$ 0,00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #f44336;"/>
+            </VBox>
+
+            <Button text="Finalizar Venda" onAction="#finalizarVenda"
+                    styleClass="button-success" prefWidth="200" prefHeight="40"/>
+        </VBox>
+    </right>
+
+    <!-- Status Bar -->
+    <bottom>
+        <HBox styleClass="status-bar" spacing="20">
+            <Label fx:id="lblStatus" text="Pronto"/>
+            <Label fx:id="lblUsuario"/>
+        </HBox>
+    </bottom>
+</BorderPane>

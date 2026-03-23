@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.frentedecaixa.controller.ProdutoController">
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+    <Label text="Cadastro de Produtos" styleClass="label-titulo"/>
+
+    <!-- Formulario -->
+    <GridPane hgap="10" vgap="8">
+        <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="campoNome" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200"/>
+
+        <Label text="Preco:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="campoPreco" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+
+        <Label text="Estoque:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="campoEstoque" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+        <Label text="Categoria:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <ComboBox fx:id="comboCategoria" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Novo" onAction="#novo"/>
+        <Button text="Salvar" onAction="#salvar" styleClass="button-success"/>
+        <Button text="Excluir" onAction="#excluir" styleClass="button-danger"/>
+    </HBox>
+
+    <TableView fx:id="tabelaProdutos" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="180"/>
+            <TableColumn fx:id="colPreco" text="Preco" prefWidth="80"/>
+            <TableColumn fx:id="colEstoque" text="Estoque" prefWidth="70"/>
+            <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>

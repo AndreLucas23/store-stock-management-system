@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.frentedecaixa.controller.EstoqueController">
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+    <Label text="Controle de Estoque" styleClass="label-titulo"/>
+
+    <Label text="Selecione um produto na tabela para alterar o estoque" style="-fx-text-fill: #888;"/>
+
+    <TableView fx:id="tabelaEstoque" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNome" text="Produto" prefWidth="200"/>
+            <TableColumn fx:id="colEstoque" text="Quantidade" prefWidth="100"/>
+            <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="120"/>
+            <TableColumn fx:id="colPreco" text="Preco" prefWidth="80"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Produto:"/>
+        <Label fx:id="lblProdutoSelecionado" text="Nenhum selecionado" style="-fx-font-weight: bold;"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Nova quantidade:"/>
+        <Spinner fx:id="spinnerEstoque" prefWidth="100"/>
+        <Button text="Salvar Estoque" onAction="#salvarEstoque" styleClass="button-success"/>
+    </HBox>
+
+    <VBox spacing="5">
+        <Label text="Alertas de Estoque Baixo:" styleClass="label-subtitulo"/>
+        <TextArea fx:id="areaAlertas" prefRowCount="3" editable="false"/>
+    </VBox>
+</VBox>
