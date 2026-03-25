@@ -1,30 +1,31 @@
 package com.frentedecaixa.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import com.frentedecaixa.dao.ClienteDAO;
 import com.frentedecaixa.model.Cliente;
 import com.frentedecaixa.pattern.singleton.ConexaoBD;
-import javafx.beans.property.SimpleDoubleProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
-import java.time.LocalDate;
-import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class ClienteController {
 
     @FXML private TextField campoNome;
     @FXML private TextField campoCpf;
     @FXML private TextField campoEmail;
-    @FXML private TextField campoLimite;
     @FXML private TableView<Cliente> tabelaClientes;
     @FXML private TableColumn<Cliente, Integer> colId;
     @FXML private TableColumn<Cliente, String> colNome;
     @FXML private TableColumn<Cliente, String> colCpf;
     @FXML private TableColumn<Cliente, String> colEmail;
-    @FXML private TableColumn<Cliente, Double> colLimite;
 
     private ClienteDAO clienteDAO;
     private Cliente clienteSelecionado;
@@ -37,7 +38,6 @@ public class ClienteController {
         colNome.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNome()));
         colCpf.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCpf()));
         colEmail.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEmail()));
-        colLimite.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getLimiteCredito()).asObject());
 
         tabelaClientes.getSelectionModel().selectedItemProperty().addListener((obs, old, novo) -> {
             if (novo != null) {
@@ -45,7 +45,6 @@ public class ClienteController {
                 campoNome.setText(novo.getNome());
                 campoCpf.setText(novo.getCpf());
                 campoEmail.setText(novo.getEmail());
-                campoLimite.setText(String.valueOf(novo.getLimiteCredito()));
             }
         });
 
@@ -58,7 +57,6 @@ public class ClienteController {
         campoNome.clear();
         campoCpf.clear();
         campoEmail.clear();
-        campoLimite.clear();
         tabelaClientes.getSelectionModel().clearSelection();
     }
 
@@ -68,7 +66,6 @@ public class ClienteController {
             String nome = campoNome.getText().trim();
             String cpf = campoCpf.getText().trim();
             String email = campoEmail.getText().trim();
-            double limite = Double.parseDouble(campoLimite.getText().trim());
 
             if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty()) {
                 mostrarErro("Preencha todos os campos.");
@@ -76,19 +73,16 @@ public class ClienteController {
             }
 
             if (clienteSelecionado == null) {
-                Cliente c = new Cliente(nome, cpf, email, LocalDate.now(), limite);
+                Cliente c = new Cliente(nome, cpf, email, LocalDate.now());
                 clienteDAO.inserir(c);
             } else {
                 clienteSelecionado.setNome(nome);
                 clienteSelecionado.setCpf(cpf);
                 clienteSelecionado.setEmail(email);
-                clienteSelecionado.setLimiteCredito(limite);
                 clienteDAO.atualizar(clienteSelecionado);
             }
             carregarClientes();
             novo();
-        } catch (NumberFormatException e) {
-            mostrarErro("Limite de credito deve ser um numero valido.");
         } catch (Exception e) {
             mostrarErro("Erro ao salvar: " + e.getMessage());
         }

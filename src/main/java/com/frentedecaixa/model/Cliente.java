@@ -9,10 +9,9 @@ public class Cliente extends Usuario {
 
     public Cliente() {}
 
-    public Cliente(String nome, String cpf, String email, LocalDate dataCadastro, double limiteCredito) {
+    public Cliente(String nome, String cpf, String email, LocalDate dataCadastro) {
         super(nome, cpf, email);
         this.dataCadastro = dataCadastro;
-        this.limiteCredito = limiteCredito;
     }
 
     public LocalDate getDataCadastro() { return dataCadastro; }

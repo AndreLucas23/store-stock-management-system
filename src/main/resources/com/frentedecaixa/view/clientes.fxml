@@ -19,9 +19,6 @@
 
         <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <TextField fx:id="campoEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
-
-        <Label text="Limite Credito:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <TextField fx:id="campoLimite" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
     </GridPane>
 
     <HBox spacing="10">
@@ -36,7 +33,6 @@
             <TableColumn fx:id="colNome" text="Nome" prefWidth="180"/>
             <TableColumn fx:id="colCpf" text="CPF" prefWidth="120"/>
             <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
-            <TableColumn fx:id="colLimite" text="Limite" prefWidth="80"/>
         </columns>
     </TableView>
 </VBox>

@@ -1,11 +1,15 @@
 package com.frentedecaixa.dao;
 
-import com.frentedecaixa.model.Cliente;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.frentedecaixa.model.Cliente;
 
 public class ClienteDAO {
 
@@ -16,13 +20,12 @@ public class ClienteDAO {
     }
 
     public void inserir(Cliente cliente) throws SQLException {
-        String sql = "INSERT INTO usuario (nome, cpf, email, tipo, data_cadastro, limite_credito) VALUES (?, ?, ?, 'CLIENTE', ?, ?)";
+        String sql = "INSERT INTO usuario (nome, cpf, email, tipo, data_cadastro) VALUES (?, ?, ?, 'CLIENTE', ?)";
         PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         stmt.setString(1, cliente.getNome());
         stmt.setString(2, cliente.getCpf());
         stmt.setString(3, cliente.getEmail());
         stmt.setString(4, cliente.getDataCadastro() != null ? cliente.getDataCadastro().toString() : LocalDate.now().toString());
-        stmt.setDouble(5, cliente.getLimiteCredito());
         stmt.executeUpdate();
         ResultSet rs = stmt.getGeneratedKeys();
         if (rs.next()) {
@@ -70,13 +73,12 @@ public class ClienteDAO {
     }
 
     public void atualizar(Cliente cliente) throws SQLException {
-        String sql = "UPDATE usuario SET nome = ?, cpf = ?, email = ?, data_cadastro = ?, limite_credito = ? WHERE id = ?";
+        String sql = "UPDATE usuario SET nome = ?, cpf = ?, email = ?, data_cadastro = ? WHERE id = ?";
         PreparedStatement stmt = conexao.prepareStatement(sql);
         stmt.setString(1, cliente.getNome());
         stmt.setString(2, cliente.getCpf());
         stmt.setString(3, cliente.getEmail());
         stmt.setString(4, cliente.getDataCadastro() != null ? cliente.getDataCadastro().toString() : null);
-        stmt.setDouble(5, cliente.getLimiteCredito());
         stmt.setInt(6, cliente.getId());
         stmt.executeUpdate();
         stmt.close();
@@ -100,7 +102,6 @@ public class ClienteDAO {
         if (dataCad != null) {
             c.setDataCadastro(LocalDate.parse(dataCad));
         }
-        c.setLimiteCredito(rs.getDouble("limite_credito"));
         return c;
     }
 }

@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     email           TEXT NOT NULL,
     tipo            TEXT NOT NULL CHECK(tipo IN ('CLIENTE', 'GERENTE')),
     data_cadastro   TEXT,
-    limite_credito  REAL DEFAULT 0.0,
     nivel_acesso    INTEGER
 );
 
@@ -51,7 +50,7 @@ INSERT OR IGNORE INTO categoria (descricao) VALUES ('Higiene');
 INSERT OR IGNORE INTO categoria (descricao) VALUES ('Eletronicos');
 
 INSERT OR IGNORE INTO usuario (nome, cpf, email, tipo, nivel_acesso) VALUES ('Admin Gerente', '00000000000', 'gerente@loja.com', 'GERENTE', 1);
-INSERT OR IGNORE INTO usuario (nome, cpf, email, tipo, data_cadastro, limite_credito) VALUES ('Cliente Padrao', '11111111111', 'cliente@email.com', 'CLIENTE', '2026-01-01', 1000.00);
+INSERT OR IGNORE INTO usuario (nome, cpf, email, tipo, data_cadastro) VALUES ('Cliente Padrao', '11111111111', 'cliente@email.com', 'CLIENTE', '2026-01-01');
 
 INSERT OR IGNORE INTO produto (nome, preco, qtd_estoque, categoria_id) VALUES ('Arroz 5kg', 25.90, 50, 1);
 INSERT OR IGNORE INTO produto (nome, preco, qtd_estoque, categoria_id) VALUES ('Feijao 1kg', 8.50, 40, 1);
